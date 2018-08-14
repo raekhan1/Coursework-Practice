@@ -1,5 +1,6 @@
 from tkinter import *
 import database as db
+import bcrypt
 
 # Initialisations
 root = Tk()
@@ -20,7 +21,7 @@ def add_user():
     passwordreenter = tbox3Text.get()
     if (password == passwordreenter):
         print(username + " " + password)
-        db.add_user(username, password)
+        db.add_user(username, bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode("utf-8"))
 
 def check_user():
     username = login_tbox1Text.get()
